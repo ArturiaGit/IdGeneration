@@ -1,0 +1,46 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!--  Add Controls for Previewer Here  -->
+        </Border>
+    </Design.PreviewWith>
+
+    <Style Selector="ComboBox">
+        <Setter Property="Background" Value="#FFFFFF" />
+        <Setter Property="BorderBrush" Value="#E3E3E3" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="0,5,5,0" />
+        <Setter Property="Height" Value="48" />
+        <Setter Property="MaxDropDownHeight" Value="250" />
+        <Setter Property="SelectedIndex" Value="0" />
+        <Setter Property="Width" Value="225" />
+        <Setter Property="Padding" Value="8,0,0,0" />
+
+        <Style Selector="^:pointerover /template/ Border#Background">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="LightGray" />
+        </Style>
+    </Style>
+
+    <Style Selector="ComboBox /template/ ContentControl#ContentPresenter">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontFamily" Value="{StaticResource CRG_Regular}" />
+    </Style>
+
+    <Style Selector="ComboBox /template/ Popup#PART_Popup">
+        <Setter Property="VerticalOffset" Value="30" />
+    </Style>
+
+    <Style Selector="ComboBox[IsDropDownOpen=True] /template/ Popup#PART_Popup">
+        <Setter Property="Transitions">
+            <Transitions>
+                <DoubleTransition
+                    Duration="0:0:0.17"
+                    Easing="CubicEaseOut"
+                    Property="VerticalOffset" />
+            </Transitions>
+        </Setter>
+        <Setter Property="VerticalOffset" Value="6" />
+        <Setter Property="Opacity" Value="1" />
+    </Style>
+</Styles>

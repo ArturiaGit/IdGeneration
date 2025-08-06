@@ -1,10 +1,31 @@
-<Application xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="IdGeneration.App"
-             RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
-  
+<!--  ReSharper disable InconsistentNaming  -->
+<Application
+    RequestedThemeVariant="Default"
+    x:Class="IdGeneration.App"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Application.Resources>
+        <StreamGeometry x:Key="arrow_up_regular">M4.21157,12.7326 C3.9244,13.0312 3.93361,13.5059 4.23213,13.7931 C4.53064,14.0803 5.00543,14.0711 5.29259,13.7725 L13.2521,5.49831 L13.2521,24.2511 C13.2521,24.6653 13.5879,25.0011 14.0021,25.0011 C14.4163,25.0011 14.7521,24.6653 14.7521,24.2511 L14.7521,5.4993 L22.7106,13.7725 C22.9978,14.0711 23.4726,14.0803 23.7711,13.7931 C24.0696,13.5059 24.0788,13.0312 23.7916,12.7326 L14.7223,3.30466 C14.3289,2.89568 13.6743,2.89568 13.2809,3.30466 L4.21157,12.7326 Z</StreamGeometry>
+        <StreamGeometry x:Key="arrow_down_regular">M23.7916,15.2664 C24.0788,14.9679 24.0696,14.4931 23.7711,14.206 C23.4726,13.9188 22.9978,13.928 22.7106,14.2265 L14.7511,22.5007 L14.7511,3.74792 C14.7511,3.33371 14.4153,2.99792 14.0011,2.99792 C13.5869,2.99792 13.2511,3.33371 13.2511,3.74793 L13.2511,22.4998 L5.29259,14.2265 C5.00543,13.928 4.53064,13.9188 4.23213,14.206 C3.93361,14.4931 3.9244,14.9679 4.21157,15.2664 L13.2809,24.6944 C13.6743,25.1034 14.3289,25.1034 14.7223,24.6944 L23.7916,15.2664 Z</StreamGeometry>
+
+        <SolidColorBrush x:Key="ComboBoxDropDownBackground">#FFFFFF</SolidColorBrush>
+
+        <FontFamily x:Key="CRG_Bold">avares://IdGeneration/Assets/Fonts/ChillRoundGothic_Bold.ttf#Chill Round Gothic</FontFamily>
+        <FontFamily x:Key="CRG_Regular">avares://IdGeneration/Assets/Fonts/ChillRoundGothic_Regular.ttf#Chill Round Gothic</FontFamily>
+    </Application.Resources>
+
     <Application.Styles>
         <FluentTheme />
+
+        <StyleInclude Source="avares://IdGeneration/Styles/TextBlockStyle.axaml" />
+        <StyleInclude Source="avares://IdGeneration/Styles/ComboBoxStyle.axaml" />
+        <StyleInclude Source="avares://IdGeneration/Styles/ComboBoxItemStyle.axaml" />
+        <StyleInclude Source="avares://IdGeneration/Styles/RadioButtonStyle.axaml" />
+        <StyleInclude Source="avares://IdGeneration/Styles/ButtonStyle.axaml" />
+
+        <StyleInclude Source="avares://IdGeneration/CustomControl/LabelControl.axaml" />
+        <StyleInclude Source="avares://IdGeneration/CustomControl/RadioButtonControl.axaml" />
+        <StyleInclude Source="avares://IdGeneration/CustomControl/CouunterStyle.axaml" />
     </Application.Styles>
 </Application>

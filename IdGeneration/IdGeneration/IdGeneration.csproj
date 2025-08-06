@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Folder Include="Assets\Fonts\" />
         <Folder Include="Data\" />
         <Folder Include="Models\"/>
         <AvaloniaResource Include="Assets\**"/>
@@ -24,5 +25,17 @@
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.0"/>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1"/>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="CustomControl\LabelControl.cs">
+        <DependentUpon>LabelControl.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="CustomControl\RadioButtonControl.cs">
+        <DependentUpon>RadioButtonControl.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="CustomControl\CounterStyle.cs">
+        <DependentUpon>CouunterStyle.axaml</DependentUpon>
+      </Compile>
     </ItemGroup>
 </Project>

@@ -1,0 +1,31 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:customControl="clr-namespace:IdGeneration.CustomControl"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border
+            Height="720"
+            Padding="20"
+            Width="1280">
+            <customControl:LabelControl Text="你好" />
+        </Border>
+    </Design.PreviewWith>
+
+    <Style Selector="customControl|LabelControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Height="{TemplateBinding Height}"
+                        Width="{TemplateBinding Width}">
+                        <TextBlock Classes="Label_TextBlock" Text="{TemplateBinding Text}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</Styles>

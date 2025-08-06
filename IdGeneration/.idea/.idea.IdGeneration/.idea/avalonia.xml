@@ -3,6 +3,17 @@
   <component name="AvaloniaProject">
     <option name="projectPerEditor">
       <map>
+        <entry key="IdGeneration/App.axaml" value="IdGeneration/IdGeneration.csproj" />
+        <entry key="IdGeneration/CustomControl/CounterStyle.axaml" value="IdGeneration/IdGeneration.csproj" />
+        <entry key="IdGeneration/CustomControl/CouunterStyle.axaml" value="IdGeneration/IdGeneration.csproj" />
+        <entry key="IdGeneration/CustomControl/LabelControl.axaml" value="IdGeneration/IdGeneration.csproj" />
+        <entry key="IdGeneration/CustomControl/RadioButtonControl.axaml" value="IdGeneration/IdGeneration.csproj" />
+        <entry key="IdGeneration/Styles/ButtonStyle.axaml" value="IdGeneration/IdGeneration.csproj" />
+        <entry key="IdGeneration/Styles/ComboBoxItem.axaml" value="IdGeneration/IdGeneration.csproj" />
+        <entry key="IdGeneration/Styles/ComboBoxItemStyle.axaml" value="IdGeneration/IdGeneration.csproj" />
+        <entry key="IdGeneration/Styles/ComboBoxStyle.axaml" value="IdGeneration/IdGeneration.csproj" />
+        <entry key="IdGeneration/Styles/RadioButtonStyle.axaml" value="IdGeneration/IdGeneration.csproj" />
+        <entry key="IdGeneration/Styles/TextBlockStyle.axaml" value="IdGeneration/IdGeneration.csproj" />
         <entry key="IdGeneration/Views/MainWindow.axaml" value="IdGeneration/IdGeneration.csproj" />
       </map>
     </option>

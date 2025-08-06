@@ -1,0 +1,29 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:customControl="clr-namespace:IdGeneration.CustomControl"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!--  Add Controls for Previewer Here  -->
+        </Border>
+    </Design.PreviewWith>
+    <Style Selector="customControl|RadioButtonControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton
+                            GroupName="{TemplateBinding GroupName}"
+                            IsChecked="{TemplateBinding IsChecked,
+                                                        Mode=TwoWay}"
+                            Margin="14,0,0,0" />
+                        <TextBlock
+                            Classes="Label_TextBlock Radio_TextBlock"
+                            Margin="5,0,0,0"
+                            Text="{TemplateBinding Text}" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</Styles>

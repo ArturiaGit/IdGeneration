@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Folder Include="Assets\FontFamilies\" />
         <Folder Include="Data\" />
         <Folder Include="Models\"/>
         <AvaloniaResource Include="Assets\**"/>
@@ -26,5 +27,20 @@
             <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
         </PackageReference>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Controls\ArturiaLabel.cs">
+        <DependentUpon>ArturiaLabel.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="Controls\ArturiaRadioButton.cs">
+        <DependentUpon>ArturiaRadioButton.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="Controls\ArturiaDateBox.cs">
+        <DependentUpon>ArturiaDateBox.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="Controls\ArturiaNumericTextBox.cs">
+        <DependentUpon>ArturiaNumericTextBox.axaml</DependentUpon>
+      </Compile>
     </ItemGroup>
 </Project>

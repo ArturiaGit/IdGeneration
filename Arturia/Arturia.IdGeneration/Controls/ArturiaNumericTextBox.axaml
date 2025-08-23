@@ -1,0 +1,47 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:controls="clr-namespace:Arturia.IdGeneration.Controls"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <controls:ArturiaNumericTextBox
+                Height="55"
+                Watermark="你好"
+                Width="250" />
+        </Border>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|ArturiaNumericTextBox">
+        <Setter Property="CornerRadius" Value="{DynamicResource Arturia.Border.CornerRadius.Default}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Arturia.Color.Border.Default}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource Arturia.Border.Thickness.Default}" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <TextBox
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Classes="Default"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Height="{TemplateBinding Height}"
+                        Padding="20,0,0,0"
+                        Text="{TemplateBinding Text}"
+                        Watermark="{TemplateBinding Watermark}"
+                        Width="{TemplateBinding Width}"
+                        x:Name="PART_TextBox" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style Selector="^ /template/ TextBox">
+            <Style Selector="^:pointerover /template/ Border#PART_BorderElement">
+                <Setter Property="BorderBrush" Value="{DynamicResource Arturia.Color.Border.Hover}" />
+            </Style>
+
+            <Style Selector="^:focus /template/ Border#PART_BorderElement">
+                <Setter Property="BorderBrush" Value="{DynamicResource Arturia.Color.Border.Hover}" />
+                <Setter Property="BorderThickness" Value="{DynamicResource Arturia.Border.Thickness.Default}" />
+            </Style>
+        </Style>
+    </Style>
+</Styles>

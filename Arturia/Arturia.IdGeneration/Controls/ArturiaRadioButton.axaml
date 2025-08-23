@@ -1,0 +1,70 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:art="clr-namespace:Arturia.IdGeneration.Controls"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Height="120" Width="120">
+            <StackPanel Orientation="Vertical">
+                <art:ArturiaRadioButton
+                    GroupName="Name"
+                    HorizontalAlignment="Center"
+                    OuterBorderSize="25"
+                    Text="测试"
+                    VerticalAlignment="Center" />
+                <art:ArturiaRadioButton
+                    GroupName="Name"
+                    HorizontalAlignment="Center"
+                    OuterBorderSize="25"
+                    Text="测试"
+                    VerticalAlignment="Center" />
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <Style Selector="art|ArturiaRadioButton">
+        <Setter Property="OuterStroke" Value="{DynamicResource Arturia.Color.Border.Default}" />
+        <Setter Property="InnerStroke" Value="{DynamicResource Arturia.Color.Border.Default}" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Grid>
+                            <Ellipse
+                                Fill="White"
+                                Height="{TemplateBinding OuterBorderSize}"
+                                Stroke="{TemplateBinding OuterStroke}"
+                                StrokeThickness="{TemplateBinding StrokeThickness}"
+                                Width="{TemplateBinding OuterBorderSize}"
+                                x:Name="OuterEllipse" />
+                            <Ellipse
+                                Fill="White"
+                                Height="{TemplateBinding InnerBorderSize}"
+                                HorizontalAlignment="Center"
+                                IsVisible="False"
+                                Stroke="{TemplateBinding InnerStroke}"
+                                StrokeThickness="{TemplateBinding StrokeThickness}"
+                                VerticalAlignment="Center"
+                                Width="{TemplateBinding InnerBorderSize}"
+                                x:Name="InnerEllipse" />
+                        </Grid>
+                        <TextBlock Margin="5,0,0,0" Text="{TemplateBinding Text}" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style Selector="^:pointerover /template/ Ellipse#OuterEllipse">
+            <Setter Property="Stroke" Value="{DynamicResource Arturia.Color.Border.Hover}" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+        <Style Selector="^:checked /template/ Ellipse#OuterEllipse">
+            <Setter Property="Stroke" Value="{DynamicResource Arturia.Color.Foreground.Accent}" />
+        </Style>
+
+        <Style Selector="^:checked /template/ Ellipse#InnerEllipse">
+            <Setter Property="IsVisible" Value="True" />
+            <Setter Property="Stroke" Value="{DynamicResource Arturia.Color.Foreground.Accent}" />
+        </Style>
+    </Style>
+</Styles>

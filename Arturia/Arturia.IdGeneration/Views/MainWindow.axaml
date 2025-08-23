@@ -1,13 +1,214 @@
 <Window
-    Height="1080"
+    Background="White"
+    CornerRadius="0"
+    Focusable="True"
+    Height="974"
     Icon="/Assets/avalonia-logo.ico"
     Title="IdGeneration"
-    Width="1920"
+    Width="1732"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d"
     x:Class="Arturia.IdGeneration.Views.MainWindow"
     x:DataType="vm:MainWindowViewModel"
     xmlns="https://github.com/avaloniaui"
+    xmlns:art="clr-namespace:Arturia.IdGeneration.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Arturia.IdGeneration.ViewModels"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" />
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid ColumnDefinitions="30,*" RowDefinitions="25,Auto,25,Auto,25,Auto,Auto,25,Auto,25,Auto,25,Auto,25,Auto,25,*,25">
+        <TextBlock
+            Classes="H1"
+            Grid.Column="1"
+            Grid.Row="1"
+            HorizontalAlignment="Left"
+            Text="随机身份证号码生成" />
+
+        <!--  出生地  -->
+        <Grid
+            ColumnDefinitions="Auto,70,Auto,70,Auto"
+            Grid.Column="1"
+            Grid.Row="3">
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <art:ArturiaLabel Text="出生地" />
+                <ComboBox
+                    Classes="ArturiaComboBox"
+                    CornerRadius="0,5,5,0"
+                    SelectedIndex="0" />
+            </StackPanel>
+
+            <ComboBox
+                Classes="ArturiaComboBox"
+                Grid.Column="2"
+                SelectedIndex="0" />
+            <ComboBox
+                Classes="ArturiaComboBox"
+                Grid.Column="4"
+                SelectedIndex="0" />
+        </Grid>
+
+        <!--  出生日期  -->
+        <Grid
+            ColumnDefinitions="Auto,15,Auto,35,Auto,35,Auto"
+            Grid.Column="1"
+            Grid.Row="5">
+            <art:ArturiaLabel Grid.Column="0" Text="出生日期" />
+            <art:ArturiaRadioButton
+                Grid.Column="2"
+                GroupName="BirthdayGroup"
+                IsChecked="True"
+                Text="出生日期"
+                x:Name="Birthday" />
+            <art:ArturiaRadioButton
+                Grid.Column="4"
+                GroupName="BirthdayGroup"
+                Text="指定年龄"
+                x:Name="Age" />
+            <art:ArturiaRadioButton
+                Grid.Column="6"
+                GroupName="BirthdayGroup"
+                Text="随机"
+                x:Name="Random" />
+        </Grid>
+
+        <!--  日期  -->
+        <StackPanel
+            Grid.Column="1"
+            Grid.Row="6"
+            IsVisible="{Binding #Birthday.IsChecked}"
+            Margin="0,25,0,0"
+            Orientation="Horizontal">
+            <art:ArturiaLabel Text="日期" />
+            <art:ArturiaDateBox CornerRadius="0,5,5,0" Watermark="YYYY/MM/DD" />
+        </StackPanel>
+        <!--  年龄  -->
+        <StackPanel
+            Grid.Column="1"
+            Grid.Row="6"
+            IsVisible="{Binding #Age.IsChecked}"
+            Margin="0,25,0,0"
+            Orientation="Horizontal">
+            <art:ArturiaLabel Text="年龄" />
+            <art:ArturiaNumericTextBox CornerRadius="0,5,5,0" Watermark="年龄" />
+            <Label
+                Content="—"
+                Foreground="{DynamicResource Arturia.Color.Border.Default}"
+                HorizontalAlignment="Center"
+                HorizontalContentAlignment="Center"
+                Margin="27.5,0,27.5,0"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center" />
+            <art:ArturiaNumericTextBox CornerRadius="5" Watermark="年龄" />
+        </StackPanel>
+
+        <!--  性别  -->
+        <Grid
+            ColumnDefinitions="Auto,15,Auto,35,Auto,35,Auto"
+            Grid.Column="1"
+            Grid.Row="8">
+            <art:ArturiaLabel Grid.Column="0" Text="性别" />
+            <art:ArturiaRadioButton
+                Grid.Column="2"
+                GroupName="AgeGroup"
+                IsChecked="True"
+                Text="男" />
+            <art:ArturiaRadioButton
+                Grid.Column="4"
+                GroupName="AgeGroup"
+                Text="女" />
+            <art:ArturiaRadioButton
+                Grid.Column="6"
+                GroupName="AgeGroup"
+                Text="随机" />
+        </Grid>
+
+        <!--  姓名  -->
+        <Grid
+            ColumnDefinitions="Auto,15,Auto,35,Auto,35,Auto"
+            Grid.Column="1"
+            Grid.Row="10">
+            <art:ArturiaLabel Grid.Column="0" Text="姓名" />
+            <art:ArturiaRadioButton
+                Grid.Column="2"
+                GroupName="NameGroup"
+                IsChecked="True"
+                Text="无" />
+            <art:ArturiaRadioButton
+                Grid.Column="4"
+                GroupName="NameGroup"
+                Text="随机" />
+        </Grid>
+
+        <!--  生成数量  -->
+        <StackPanel
+            Grid.Column="1"
+            Grid.Row="12"
+            Orientation="Horizontal">
+            <art:ArturiaLabel Text="生成数量" />
+            <art:ArturiaNumericTextBox
+                CornerRadius="0,5,5,0"
+                Pattern="^[0-9]+$"
+                Text="5" />
+            <TextBlock
+                FontSize="{DynamicResource Arturia.FontSize.Watermark}"
+                Foreground="{DynamicResource Arturia.Color.Foreground.Watermark}"
+                Margin="5,0,0,0"
+                Text="默认为5，生成数量最小为1，最大为1000" />
+        </StackPanel>
+
+        <!--  功能按钮  -->
+        <Grid
+            ColumnDefinitions="Auto,32,Auto,32,Auto"
+            Grid.Column="1"
+            Grid.Row="14">
+            <Button
+                Background="{DynamicResource Arturia.Button.Background.Selected}"
+                Classes="Default"
+                Content="生成"
+                Grid.Column="0" />
+            <Button
+                Background="{DynamicResource Arturia.Button.Background.Default}"
+                Classes="Default"
+                Content="复制"
+                Grid.Column="2" />
+            <Button
+                Background="{DynamicResource Arturia.Button.Background.Default}"
+                Classes="Default"
+                Content="清空"
+                Grid.Column="4" />
+        </Grid>
+
+        <!--  结果  -->
+        <Border
+            BorderBrush="{DynamicResource Arturia.Color.Border.Default}"
+            BorderThickness="{DynamicResource Arturia.Border.Thickness.Default}"
+            CornerRadius="{DynamicResource Arturia.Border.CornerRadius.Default}"
+            Grid.Column="1"
+            Grid.Row="16"
+            HorizontalAlignment="Left"
+            Width="1220">
+            <Grid RowDefinitions="Auto,*">
+                <Border
+                    BorderBrush="{DynamicResource Arturia.Color.Border.Default}"
+                    BorderThickness="0,0,0,1"
+                    Grid.Row="0"
+                    Height="53.5"
+                    VerticalAlignment="Top">
+                    <TextBlock
+                        HorizontalAlignment="Left"
+                        Margin="21.5,0,0,0"
+                        Text="生成结果" />
+                </Border>
+                <ScrollViewer Grid.Row="1">
+                    <SelectableTextBlock
+                        FontFamily="{DynamicResource Arturia.FontFamily.Normal}"
+                        FontSize="{DynamicResource Arturia.FontSize.Normal}"
+                        Foreground="{DynamicResource Arturia.Color.Foreground.Default}"
+                        HorizontalAlignment="Left"
+                        Margin="21.5,8,0,0"
+                        VerticalAlignment="Top" />
+                </ScrollViewer>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,11 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="Border.ArturiaBorder">
+        <Setter Property="BorderThickness" Value="{DynamicResource Arturia.Border.Thickness.Default}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Arturia.Color.Border.Default}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource Arturia.Border.CornerRadius.Default}" />
+
+        <Style Selector="^:pointerover">
+            <Setter Property="BorderBrush" Value="{DynamicResource Arturia.Color.Border.Hover}" />
+        </Style>
+    </Style>
+</Styles>

@@ -10,7 +10,6 @@
 
     <ItemGroup>
         <Folder Include="Assets\FontFamilies\" />
-        <Folder Include="Data\" />
         <Folder Include="Models\"/>
         <AvaloniaResource Include="Assets\**"/>
         <Folder Include="Services\" />

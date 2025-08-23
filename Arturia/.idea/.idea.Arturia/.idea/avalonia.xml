@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="Arturia.IdGeneration/App.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Controls/ArturiaDateBox.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Controls/ArturiaDatePicker.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Controls/ArturiaLabel.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Controls/ArturiaNumericTextBox.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Controls/ArturiaRadioButton.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Styles/BorderStyle.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Styles/ButtonStyle.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Styles/ComboBoxItemStyle.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Styles/ComboBoxStyle.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Styles/DefaultStyle.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Styles/LabelStyle.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Styles/RadioButtonStyle.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Styles/TextBlockStyle.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Styles/TextBoxStyle.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Themes/ColorResource.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Themes/SkinDefault/Theme.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Themes/SkinDefault/_Resource.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Themes/Theme.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Views/MainWindow.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

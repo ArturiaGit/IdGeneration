@@ -1,0 +1,29 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:styles="clr-namespace:Arturia.IdGeneration.Controls"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="styles|ArturiaLabel">
+        <Setter Property="Background" Value="{DynamicResource Arturia.Color.Label.Background}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Arturia.Color.Border.Default}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource Arturia.Border.Thickness.Default}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Height="{TemplateBinding Height}"
+                        Width="{TemplateBinding Width}">
+                        <TextBlock Text="{TemplateBinding Text}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style Selector="^:pointerover /template/ Border">
+            <Setter Property="BorderBrush" Value="{DynamicResource Arturia.Color.Border.Hover}" />
+        </Style>
+    </Style>
+</Styles>

@@ -1,0 +1,26 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="ComboBoxItem">
+        <Setter Property="Width" Value="250" />
+        <Setter Property="Height" Value="50" />
+
+        <Style Selector="^ TextBlock">
+            <Setter Property="Margin" Value="19,0,0,0" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+        </Style>
+
+        <Style Selector="^:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource Arturia.Color.Background.Hover}" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+
+        <Style Selector="^:selected">
+            <Style Selector="^ TextBlock">
+                <Setter Property="Foreground" Value="{DynamicResource Arturia.Color.Foreground.Accent}" />
+            </Style>
+            <Style Selector="^ /template/ ContentPresenter">
+                <Setter Property="Background" Value="{DynamicResource Arturia.Color.Border.Background}" />
+                <Setter Property="Cursor" Value="Arrow" />
+            </Style>
+        </Style>
+    </Style>
+</Styles>

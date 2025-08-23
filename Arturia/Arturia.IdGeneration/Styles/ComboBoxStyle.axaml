@@ -1,0 +1,75 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!--  Add Controls for Previewer Here  -->
+        </Border>
+    </Design.PreviewWith>
+
+    <Style Selector="ComboBox.ArturiaComboBox">
+        <Setter Property="BorderBrush" Value="{DynamicResource Arturia.Color.Border.Default}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource Arturia.Border.Thickness.Default}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource Arturia.Border.CornerRadius.Default}" />
+        <Setter Property="Height" Value="55" />
+        <Setter Property="Width" Value="250" />
+
+        <Style Selector="^ TextBlock">
+            <Setter Property="Margin" Value="19,0,0,0" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+        </Style>
+
+        <Style Selector="^ /template/ PathIcon#DropDownGlyph">
+            <Setter Property="Height" Value="20" />
+            <Setter Property="Width" Value="20" />
+            <Setter Property="Data" Value="M459.093333 788.309333L99.584 356.650667a61.013333 61.013333 0 0 1-8.277333-65.365334C101.546667 269.738667 123.477333 256 147.626667 256H876.373333c24.234667 0 46.250667 13.866667 56.490667 35.626667a61.013333 61.013333 0 0 1-8.96 65.621333L554.410667 788.906667a62.464 62.464 0 0 1-95.402667-0.597334h0.128z" />
+            <Setter Property="Foreground" Value="{DynamicResource Arturia.Color.Label.Background}" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Duration="0:0:0.25" Property="RenderTransform" />
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="^:dropdownopen /template/ PathIcon#DropDownGlyph">
+            <Setter Property="RenderTransform" Value="rotate(180deg)" />
+            <Setter Property="BorderBrush" Value="{DynamicResource Arturia.Color.Border.Hover}" />
+        </Style>
+        <Style Selector="^:dropdownopen /template/ PathIcon#DropDownGlyph">
+            <Setter Property="RenderTransform" Value="rotate(180deg)" />
+            <Setter Property="BorderBrush" Value="{DynamicResource Arturia.Color.Border.Hover}" />
+        </Style>
+
+        <Style Selector="^ /template/ Popup#PART_Popup">
+            <Setter Property="VerticalOffset" Value="50" />
+            <Setter Property="Opacity" Value="0" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Duration="0:0:0.15" Property="VerticalOffset" />
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="^:dropdownopen /template/ Popup#PART_Popup">
+            <Setter Property="VerticalOffset" Value="0" />
+        </Style>
+
+        <Style Selector="^ /template/ Border#PopupBorder">
+            <Setter Property="Margin" Value="0,5,0,0" />
+            <Setter Property="Width" Value="250" />
+            <Setter Property="Background" Value="{DynamicResource Arturia.Color.Border.Background}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource Arturia.Color.Border.Hover}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource Arturia.Border.CornerRadius.Default}" />
+        </Style>
+
+        <Style Selector="^:pointerover /template/ Border#Background">
+            <Setter Property="BorderBrush" Value="{DynamicResource Arturia.Color.Border.Hover}" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+
+        <Style Selector="^:dropdownopen /template/ Border#Background">
+            <Setter Property="BorderBrush" Value="{DynamicResource Arturia.Color.Border.Hover}" />
+        </Style>
+
+        <Style Selector="^:pressed /template/ Border#Background">
+            <Setter Property="Background" Value="{DynamicResource Arturia.Color.Border.Pressed}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource Arturia.Color.Border.Hover}" />
+        </Style>
+    </Style>
+</Styles>

@@ -49,23 +49,23 @@
 
         <!--  出生日期  -->
         <Grid
-            ColumnDefinitions="Auto,15,Auto,35,Auto,35,Auto"
+            ColumnDefinitions="Auto,Auto,20,Auto,20,Auto"
             Grid.Column="1"
             Grid.Row="5">
             <art:ArturiaLabel Grid.Column="0" Text="出生日期" />
             <art:ArturiaRadioButton
-                Grid.Column="2"
+                Grid.Column="1"
                 GroupName="BirthdayGroup"
                 IsChecked="True"
                 Text="出生日期"
                 x:Name="Birthday" />
             <art:ArturiaRadioButton
-                Grid.Column="4"
+                Grid.Column="3"
                 GroupName="BirthdayGroup"
                 Text="指定年龄"
                 x:Name="Age" />
             <art:ArturiaRadioButton
-                Grid.Column="6"
+                Grid.Column="5"
                 GroupName="BirthdayGroup"
                 Text="随机"
                 x:Name="Random" />
@@ -103,38 +103,38 @@
 
         <!--  性别  -->
         <Grid
-            ColumnDefinitions="Auto,15,Auto,35,Auto,35,Auto"
+            ColumnDefinitions="Auto,Auto,20,Auto,20,Auto"
             Grid.Column="1"
             Grid.Row="8">
             <art:ArturiaLabel Grid.Column="0" Text="性别" />
             <art:ArturiaRadioButton
-                Grid.Column="2"
+                Grid.Column="1"
                 GroupName="AgeGroup"
                 IsChecked="True"
                 Text="男" />
             <art:ArturiaRadioButton
-                Grid.Column="4"
+                Grid.Column="3"
                 GroupName="AgeGroup"
                 Text="女" />
             <art:ArturiaRadioButton
-                Grid.Column="6"
+                Grid.Column="5"
                 GroupName="AgeGroup"
                 Text="随机" />
         </Grid>
 
         <!--  姓名  -->
         <Grid
-            ColumnDefinitions="Auto,15,Auto,35,Auto,35,Auto"
+            ColumnDefinitions="Auto,Auto,20,Auto"
             Grid.Column="1"
             Grid.Row="10">
             <art:ArturiaLabel Grid.Column="0" Text="姓名" />
             <art:ArturiaRadioButton
-                Grid.Column="2"
+                Grid.Column="1"
                 GroupName="NameGroup"
                 IsChecked="True"
                 Text="无" />
             <art:ArturiaRadioButton
-                Grid.Column="4"
+                Grid.Column="3"
                 GroupName="NameGroup"
                 Text="随机" />
         </Grid>

@@ -9,6 +9,7 @@ public class ArturiaRadioButton : RadioButton
     static ArturiaRadioButton()
     {
         BorderBrushProperty.OverrideDefaultValue<ArturiaRadioButton>(new SolidColorBrush(Color.Parse("#B5B5B5")));
+        BorderThicknessProperty.OverrideDefaultValue<ArturiaRadioButton>(new Thickness(2));
     }
     
     public static readonly StyledProperty<double> OuterBorderSizeProperty = AvaloniaProperty.Register<ArturiaRadioButton, double>(
@@ -26,29 +27,21 @@ public class ArturiaRadioButton : RadioButton
         get => GetValue(InnerBorderSizeProperty);
         set => SetValue(InnerBorderSizeProperty, value);
     }
-
-    public static readonly StyledProperty<double> StrokeThicknessProperty = AvaloniaProperty.Register<ArturiaRadioButton, double>(
-        nameof(StrokeThickness), defaultValue: 2);
-    public double StrokeThickness
+    
+    public static readonly StyledProperty<IBrush?> OuterBorderProperty = AvaloniaProperty.Register<ArturiaRadioButton, IBrush?>(
+        nameof(OuterBorder), new SolidColorBrush(Color.Parse("#B5B5B5")));
+    public IBrush? OuterBorder
     {
-        get => GetValue(StrokeThicknessProperty);
-        set => SetValue(StrokeThicknessProperty, value);
-    }
-
-    public static readonly StyledProperty<IBrush?> OuterStrokeProperty = AvaloniaProperty.Register<ArturiaRadioButton, IBrush?>(
-        nameof(OuterStroke), new SolidColorBrush(Color.Parse("#B5B5B5")));
-    public IBrush? OuterStroke
-    {
-        get => GetValue(OuterStrokeProperty);
-        set => SetValue(OuterStrokeProperty, value);
+        get => GetValue(OuterBorderProperty);
+        set => SetValue(OuterBorderProperty, value);
     }
     
-    public static readonly StyledProperty<IBrush?> InnerStrokeProperty = AvaloniaProperty.Register<ArturiaRadioButton, IBrush?>(
-        nameof(InnerStroke), new SolidColorBrush(Color.Parse("#B5B5B5")));
-    public IBrush? InnerStroke
+    public static readonly StyledProperty<IBrush?> InnerBorderProperty = AvaloniaProperty.Register<ArturiaRadioButton, IBrush?>(
+        nameof(InnerBorder), new SolidColorBrush(Color.Parse("#B5B5B5")));
+    public IBrush? InnerBorder
     {
-        get => GetValue(InnerStrokeProperty);
-        set => SetValue(InnerStrokeProperty, value);
+        get => GetValue(InnerBorderProperty);
+        set => SetValue(InnerBorderProperty, value);
     }
 
     public static readonly StyledProperty<string?> TextProperty = AvaloniaProperty.Register<ArturiaRadioButton, string?>(

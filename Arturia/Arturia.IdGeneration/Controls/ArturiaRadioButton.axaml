@@ -3,68 +3,87 @@
     xmlns:art="clr-namespace:Arturia.IdGeneration.Controls"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
-        <Border Height="120" Width="120">
-            <StackPanel Orientation="Vertical">
-                <art:ArturiaRadioButton
-                    GroupName="Name"
-                    HorizontalAlignment="Center"
-                    OuterBorderSize="25"
-                    Text="测试"
-                    VerticalAlignment="Center" />
-                <art:ArturiaRadioButton
-                    GroupName="Name"
-                    HorizontalAlignment="Center"
-                    OuterBorderSize="25"
-                    Text="测试"
-                    VerticalAlignment="Center" />
-            </StackPanel>
-        </Border>
+        <art:ArturiaRadioButton
+            GroupName="Name"
+            OuterBorderSize="25"
+            Text="测试 1" />
     </Design.PreviewWith>
 
     <Style Selector="art|ArturiaRadioButton">
-        <Setter Property="OuterStroke" Value="{DynamicResource Arturia.Color.Border.Default}" />
-        <Setter Property="InnerStroke" Value="{DynamicResource Arturia.Color.Border.Default}" />
+        <Setter Property="OuterBorder" Value="{DynamicResource Arturia.Color.Border.Default}" />
+        <Setter Property="InnerBorder" Value="{DynamicResource Arturia.Color.Border.Default}" />
 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Grid>
-                            <Ellipse
-                                Fill="White"
+                    <Grid ClipToBounds="False" ColumnDefinitions="Auto,5,*">
+                        <Grid
+                            Grid.Column="0"
+                            Height="30"
+                            Width="41">
+                            <Border
+                                Background="White"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="50"
                                 Height="{TemplateBinding OuterBorderSize}"
-                                Stroke="{TemplateBinding OuterStroke}"
-                                StrokeThickness="{TemplateBinding StrokeThickness}"
+                                HorizontalAlignment="Right"
                                 Width="{TemplateBinding OuterBorderSize}"
-                                x:Name="OuterEllipse" />
-                            <Ellipse
-                                Fill="White"
-                                Height="{TemplateBinding InnerBorderSize}"
-                                HorizontalAlignment="Center"
-                                IsVisible="False"
-                                Stroke="{TemplateBinding InnerStroke}"
-                                StrokeThickness="{TemplateBinding StrokeThickness}"
-                                VerticalAlignment="Center"
-                                Width="{TemplateBinding InnerBorderSize}"
-                                x:Name="InnerEllipse" />
+                                x:Name="OuterBorder">
+                                <Border
+                                    Background="White"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="50"
+                                    Height="{TemplateBinding InnerBorderSize}"
+                                    HorizontalAlignment="Center"
+                                    IsVisible="False"
+                                    VerticalAlignment="Center"
+                                    Width="{TemplateBinding InnerBorderSize}"
+                                    x:Name="InnerBorder" />
+                            </Border>
                         </Grid>
-                        <TextBlock Margin="5,0,0,0" Text="{TemplateBinding Text}" />
-                    </StackPanel>
+                        <TextBlock
+                            Grid.Column="2"
+                            HorizontalAlignment="Left"
+                            Text="{TemplateBinding Text}"
+                            VerticalAlignment="Center" />
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
 
-        <Style Selector="^:pointerover /template/ Ellipse#OuterEllipse">
-            <Setter Property="Stroke" Value="{DynamicResource Arturia.Color.Border.Hover}" />
+        <Style Selector="^:pointerover /template/ Border#OuterBorder">
+            <Setter Property="BorderBrush" Value="{DynamicResource Arturia.Color.Border.Hover}" />
             <Setter Property="Cursor" Value="Hand" />
         </Style>
-        <Style Selector="^:checked /template/ Ellipse#OuterEllipse">
-            <Setter Property="Stroke" Value="{DynamicResource Arturia.Color.Foreground.Accent}" />
+
+        <Style Selector="^:checked /template/ Border#OuterBorder">
+            <Setter Property="BorderBrush" Value="{DynamicResource Arturia.Color.Foreground.Accent}" />
+            <Style.Animations>
+                <Animation
+                    Duration="0:0:0.2"
+                    Easing="ElasticEaseInOut"
+                    FillMode="None">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="ScaleTransform.ScaleX" Value="0" />
+                        <Setter Property="ScaleTransform.ScaleY" Value="0" />
+                    </KeyFrame>
+                    <KeyFrame Cue="50%">
+                        <Setter Property="ScaleTransform.ScaleX" Value="1" />
+                        <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="ScaleTransform.ScaleX" Value="1.1" />
+                        <Setter Property="ScaleTransform.ScaleY" Value="1.1" />
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
         </Style>
 
-        <Style Selector="^:checked /template/ Ellipse#InnerEllipse">
+        <Style Selector="^:checked /template/ Border#InnerBorder">
             <Setter Property="IsVisible" Value="True" />
-            <Setter Property="Stroke" Value="{DynamicResource Arturia.Color.Foreground.Accent}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource Arturia.Color.Foreground.Accent}" />
         </Style>
     </Style>
 </Styles>

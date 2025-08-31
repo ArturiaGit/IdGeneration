@@ -1,11 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using System.Linq;
+using Arturia.IdGeneration.Models;
+using Arturia.IdGeneration.Services;
 using Avalonia.Markup.Xaml;
-using Arturia.IdGeneration.ViewModels;
 using Arturia.IdGeneration.Views;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace Arturia.IdGeneration;
 
@@ -16,17 +22,27 @@ public partial class App : Application
         AvaloniaXamlLoader.Load(this);
     }
 
+    private static IConfigurationRoot Configuration { get; set; } = null!;
+
     public override void OnFrameworkInitializationCompleted()
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
-            // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
             DisableAvaloniaDataAnnotationValidation();
-            desktop.MainWindow = new MainWindow
-            {
-                DataContext = new MainWindowViewModel(),
-            };
+
+            string jsonPath = Path.Combine(Directory.GetCurrentDirectory(), "Data");
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(jsonPath)
+                .AddJsonFile("areas.json", optional: true, reloadOnChange: true);
+
+            var collection = new ServiceCollection();
+            collection.AddCommonServices();
+
+            Configuration = builder.Build();
+            collection.Configure<List<AreaModel>>(Configuration.GetSection("Areas"));
+            
+            var services = collection.BuildServiceProvider();
+            desktop.MainWindow = services.GetRequiredService<MainView>();
         }
 
         base.OnFrameworkInitializationCompleted();

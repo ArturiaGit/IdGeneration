@@ -1,0 +1,37 @@
+<Window
+    Background="Transparent"
+    CanResize="False"
+    ExtendClientAreaToDecorationsHint="True"
+    Height="{Binding Height}"
+    SystemDecorations="None"
+    Width="{Binding Width}"
+    WindowStartupLocation="CenterOwner"
+    d:DesignHeight="200"
+    d:DesignWidth="400"
+    mc:Ignorable="d"
+    x:Class="Arturia.IdGeneration.Views.MessageBoxView"
+    x:DataType="viewModels:MessageBoxViewModel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:Arturia.IdGeneration.ViewModels"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid
+        Background="#000000"
+        Opacity="0.7"
+        RowDefinitions="*,*">
+        <PathIcon
+            Data="{DynamicResource Arturia.PathIcon.Warning}"
+            Foreground="White"
+            Grid.Row="0"
+            Height="30"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Width="30" />
+        <TextBlock
+            Foreground="White"
+            Grid.Row="1"
+            Text="{Binding Message}"
+            VerticalAlignment="Top" />
+    </Grid>
+</Window>

@@ -8,14 +8,27 @@
     Width="1732"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d"
-    x:Class="Arturia.IdGeneration.Views.MainWindow"
-    x:DataType="vm:MainWindowViewModel"
+    x:Class="Arturia.IdGeneration.Views.MainView"
+    x:DataType="vm:MainViewModel"
     xmlns="https://github.com/avaloniaui"
     xmlns:art="clr-namespace:Arturia.IdGeneration.Controls"
+    xmlns:converters="clr-namespace:Arturia.IdGeneration.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:enums="clr-namespace:Arturia.IdGeneration.Enums"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Arturia.IdGeneration.ViewModels"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Window.Resources>
+        <converters:ObjectArrayConverter x:Key="ObjectArrayConverter" />
+        <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+    </Window.Resources>
+
+    <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Loaded">
+            <InvokeCommandAction Command="{Binding LoadProvinceNamesCommand}" />
+        </EventTriggerBehavior>
+    </Interaction.Behaviors>
     <Grid ColumnDefinitions="30,*" RowDefinitions="25,Auto,25,Auto,25,Auto,Auto,25,Auto,25,Auto,25,Auto,25,Auto,25,*,25">
         <TextBlock
             Classes="H1"
@@ -34,17 +47,46 @@
                 <ComboBox
                     Classes="ArturiaComboBox"
                     CornerRadius="0,5,5,0"
-                    SelectedIndex="0" />
+                    DisplayMemberBinding="{Binding Name}"
+                    ItemsSource="{Binding Provinces}"
+                    SelectedIndex="{Binding SelectedProvinceIndex}"
+                    x:Name="ProvinceComboBox">
+                    <Interaction.Behaviors>
+                        <EventTriggerBehavior EventName="SelectionChanged">
+                            <InvokeCommandAction Command="{Binding LoadCityNamesCommand}" CommandParameter="{Binding #ProvinceComboBox.SelectedItem}" />
+                        </EventTriggerBehavior>
+                    </Interaction.Behaviors>
+                </ComboBox>
             </StackPanel>
 
             <ComboBox
                 Classes="ArturiaComboBox"
+                DisplayMemberBinding="{Binding Name}"
                 Grid.Column="2"
-                SelectedIndex="0" />
+                ItemsSource="{Binding Cities}"
+                SelectedIndex="{Binding SelectedCityIndex}"
+                x:Name="CityComboBox">
+                <Interaction.Behaviors>
+                    <EventTriggerBehavior EventName="SelectionChanged">
+                        <InvokeCommandAction Command="{Binding LoadDistrictNamesCommand}">
+                            <InvokeCommandAction.CommandParameter>
+                                <MultiBinding Converter="{StaticResource ObjectArrayConverter}">
+                                    <Binding ElementName="ProvinceComboBox" Path="SelectedItem" />
+                                    <Binding ElementName="CityComboBox" Path="SelectedItem" />
+                                </MultiBinding>
+                            </InvokeCommandAction.CommandParameter>
+                        </InvokeCommandAction>
+                    </EventTriggerBehavior>
+                </Interaction.Behaviors>
+            </ComboBox>
+
             <ComboBox
                 Classes="ArturiaComboBox"
+                DisplayMemberBinding="{Binding Name}"
                 Grid.Column="4"
-                SelectedIndex="0" />
+                ItemsSource="{Binding Districts}"
+                SelectedIndex="{Binding SelectedDistrictIndex}"
+                x:Name="DistrictComboBox" />
         </Grid>
 
         <!--  出生日期  -->
@@ -56,17 +98,19 @@
             <art:ArturiaRadioButton
                 Grid.Column="1"
                 GroupName="BirthdayGroup"
-                IsChecked="True"
+                IsChecked="{Binding CurrentBirthDateOptionType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:BirthDateOptionEnum.BySpecificDate}}"
                 Text="出生日期"
                 x:Name="Birthday" />
             <art:ArturiaRadioButton
                 Grid.Column="3"
                 GroupName="BirthdayGroup"
+                IsChecked="{Binding CurrentBirthDateOptionType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:BirthDateOptionEnum.ByAge}}"
                 Text="指定年龄"
                 x:Name="Age" />
             <art:ArturiaRadioButton
                 Grid.Column="5"
                 GroupName="BirthdayGroup"
+                IsChecked="{Binding CurrentBirthDateOptionType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:BirthDateOptionEnum.Random}}"
                 Text="随机"
                 x:Name="Random" />
         </Grid>
@@ -79,8 +123,13 @@
             Margin="0,25,0,0"
             Orientation="Horizontal">
             <art:ArturiaLabel Text="日期" />
-            <art:ArturiaDateBox CornerRadius="0,5,5,0" Watermark="YYYY/MM/DD" />
+            <art:ArturiaDateBox
+                CornerRadius="0,5,5,0"
+                Text="{Binding BirthDate, Mode=TwoWay}"
+                Watermark="YYYY/MM/DD"
+                x:Name="BirthdayBox" />
         </StackPanel>
+
         <!--  年龄  -->
         <StackPanel
             Grid.Column="1"
@@ -89,7 +138,14 @@
             Margin="0,25,0,0"
             Orientation="Horizontal">
             <art:ArturiaLabel Text="年龄" />
-            <art:ArturiaNumericTextBox CornerRadius="0,5,5,0" Watermark="年龄" />
+            <art:ArturiaNumericTextBox
+                CornerRadius="0,5,5,0"
+                MaxValue="120"
+                MiniValue="0"
+                Pattern="^[0-9]+$"
+                Text="{Binding StartAge, Mode=TwoWay}"
+                Watermark="起始年龄"
+                x:Name="StartAgeTextBox" />
             <Label
                 Content="—"
                 Foreground="{DynamicResource Arturia.Color.Border.Default}"
@@ -98,7 +154,14 @@
                 Margin="27.5,0,27.5,0"
                 VerticalAlignment="Center"
                 VerticalContentAlignment="Center" />
-            <art:ArturiaNumericTextBox CornerRadius="5" Watermark="年龄" />
+            <art:ArturiaNumericTextBox
+                CornerRadius="5"
+                MaxValue="120"
+                MiniValue="0"
+                Pattern="^[0-9]+$"
+                Text="{Binding EndAge, Mode=TwoWay}"
+                Watermark="结束年龄"
+                x:Name="EndAgeTextBox" />
         </StackPanel>
 
         <!--  性别  -->
@@ -109,16 +172,18 @@
             <art:ArturiaLabel Grid.Column="0" Text="性别" />
             <art:ArturiaRadioButton
                 Grid.Column="1"
-                GroupName="AgeGroup"
-                IsChecked="True"
+                GroupName="GenderGroup"
+                IsChecked="{Binding CurrentGenderOption, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:GenderOptionEnum.Male}}"
                 Text="男" />
             <art:ArturiaRadioButton
                 Grid.Column="3"
-                GroupName="AgeGroup"
+                GroupName="GenderGroup"
+                IsChecked="{Binding CurrentGenderOption, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:GenderOptionEnum.Female}}"
                 Text="女" />
             <art:ArturiaRadioButton
                 Grid.Column="5"
-                GroupName="AgeGroup"
+                GroupName="GenderGroup"
+                IsChecked="{Binding CurrentGenderOption, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:GenderOptionEnum.Random}}"
                 Text="随机" />
         </Grid>
 
@@ -131,11 +196,12 @@
             <art:ArturiaRadioButton
                 Grid.Column="1"
                 GroupName="NameGroup"
-                IsChecked="True"
+                IsChecked="{Binding CurrentNameType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:NameGenerationOptionEnum.None}}"
                 Text="无" />
             <art:ArturiaRadioButton
                 Grid.Column="3"
                 GroupName="NameGroup"
+                IsChecked="{Binding CurrentNameType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:NameGenerationOptionEnum.Random}}"
                 Text="随机" />
         </Grid>
 
@@ -147,13 +213,15 @@
             <art:ArturiaLabel Text="生成数量" />
             <art:ArturiaNumericTextBox
                 CornerRadius="0,5,5,0"
+                MaxValue="50"
+                MiniValue="1"
                 Pattern="^[0-9]+$"
-                Text="5" />
+                Text="{Binding GenerationCount, Mode=TwoWay}" />
             <TextBlock
                 FontSize="{DynamicResource Arturia.FontSize.Watermark}"
                 Foreground="{DynamicResource Arturia.Color.Foreground.Watermark}"
                 Margin="5,0,0,0"
-                Text="默认为5，生成数量最小为1，最大为1000" />
+                Text="默认为5，生成数量最小为1，最大为50" />
         </StackPanel>
 
         <!--  功能按钮  -->
@@ -164,6 +232,7 @@
             <Button
                 Background="{DynamicResource Arturia.Button.Background.Selected}"
                 Classes="Default"
+                Command="{Binding GenerationResultCommand}"
                 Content="生成"
                 Grid.Column="0" />
             <Button
@@ -199,13 +268,18 @@
                         Margin="21.5,0,0,0"
                         Text="生成结果" />
                 </Border>
-                <ScrollViewer Grid.Row="1">
+                <ScrollViewer
+                    AllowAutoHide="True"
+                    Grid.Row="1"
+                    HorizontalScrollBarVisibility="Auto"
+                    VerticalScrollBarVisibility="Auto">
                     <SelectableTextBlock
                         FontFamily="{DynamicResource Arturia.FontFamily.Normal}"
                         FontSize="{DynamicResource Arturia.FontSize.Normal}"
                         Foreground="{DynamicResource Arturia.Color.Foreground.Default}"
                         HorizontalAlignment="Left"
                         Margin="21.5,8,0,0"
+                        Text="{Binding ResultJson, Mode=OneWay}"
                         VerticalAlignment="Top" />
                 </ScrollViewer>
             </Grid>

@@ -22,7 +22,11 @@
         <entry key="Arturia.IdGeneration/Themes/SkinDefault/Theme.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
         <entry key="Arturia.IdGeneration/Themes/SkinDefault/_Resource.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
         <entry key="Arturia.IdGeneration/Themes/Theme.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Views/DisclaimerView.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Views/MainView.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
         <entry key="Arturia.IdGeneration/Views/MainWindow.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Views/MessageBox.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
+        <entry key="Arturia.IdGeneration/Views/MessageBoxView.axaml" value="Arturia.IdGeneration/Arturia.IdGeneration.csproj" />
       </map>
     </option>
   </component>

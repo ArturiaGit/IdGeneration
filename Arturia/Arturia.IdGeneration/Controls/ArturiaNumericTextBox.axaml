@@ -25,7 +25,8 @@
                         CornerRadius="{TemplateBinding CornerRadius}"
                         Height="{TemplateBinding Height}"
                         Padding="20,0,0,0"
-                        Text="{TemplateBinding Text}"
+                        Text="{TemplateBinding Text,
+                                               Mode=TwoWay}"
                         Watermark="{TemplateBinding Watermark}"
                         Width="{TemplateBinding Width}"
                         x:Name="PART_TextBox" />

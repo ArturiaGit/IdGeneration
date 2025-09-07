@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Arturia.IdGeneration.ViewModels;
 using Avalonia.Controls;
@@ -9,7 +10,7 @@ namespace Arturia.IdGeneration.Services;
 
 public class DialogService(IServiceProvider provider) : IDialogService
 {
-    public void ShowWindow<TViewModel>(TViewModel viewModel,int seconds) where TViewModel : ViewModelBase
+    public async Task ShowWindowAsync<TViewModel>(TViewModel viewModel,int seconds=0) where TViewModel : ViewModelBase
     {
         string? viewName = typeof(TViewModel).AssemblyQualifiedName?
             .Replace("ViewModel", "View",StringComparison.InvariantCulture)
@@ -24,22 +25,28 @@ public class DialogService(IServiceProvider provider) : IDialogService
         Window? view = provider.GetRequiredService(viewType) as Window;
         if (view is null)
             throw new ArgumentNullException(nameof(view), "无法创建对应的View实例");
-        
         view.DataContext = viewModel;
-        view.ShowDialog(GetMainWindow());
 
-        Task.Run(async () =>
+        var cts = seconds > 0 ? new CancellationTokenSource(TimeSpan.FromSeconds(seconds)) : null;
+        cts?.Token.Register(() =>
         {
-            await Task.Delay(seconds*1000);
-            Avalonia.Threading.Dispatcher.UIThread.Post(() =>
+            Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
             {
                 if (view.IsVisible)
                     view.Close();
             });
-        });
+        },useSynchronizationContext:false);
+        try
+        {
+            await view.ShowDialog(GetMainWindow());
+        }
+        finally
+        {
+            cts?.Dispose();
+        }
     }
     
-    private Window GetMainWindow()
+    private static Window GetMainWindow()
         => App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop
             ? desktop.MainWindow
             : throw new InvalidOperationException("无法获取主窗口");

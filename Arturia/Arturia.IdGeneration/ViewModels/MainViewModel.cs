@@ -131,7 +131,7 @@ public partial class MainViewModel(IAreaService areaService, IDialogService dial
         string locationCode = GetLocationCode();
         if (string.IsNullOrEmpty(locationCode))
         {
-            dialogService.ShowWindow(new MessageBoxViewModel
+            dialogService.ShowWindowAsync(new MessageBoxViewModel
             {
                 Message = "请选择出生地址",
             },2);
@@ -140,7 +140,7 @@ public partial class MainViewModel(IAreaService areaService, IDialogService dial
 
         if (EndAge - StartAge < 0)
         {
-            dialogService.ShowWindow(new MessageBoxViewModel
+            dialogService.ShowWindowAsync(new MessageBoxViewModel
             {
                 Message = "年龄范围不正确",
             },2);
@@ -153,7 +153,7 @@ public partial class MainViewModel(IAreaService areaService, IDialogService dial
             string birthday = GetBirthDay(CurrentBirthDateOptionType);
             if (!DateTime.TryParse(birthday, out _))
             {
-                dialogService.ShowWindow(new MessageBoxViewModel
+                dialogService.ShowWindowAsync(new MessageBoxViewModel
                 {
                     Message = "日期格式错误",
                 },2);

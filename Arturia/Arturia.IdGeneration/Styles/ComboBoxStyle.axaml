@@ -9,8 +9,8 @@
         <Setter Property="BorderBrush" Value="{DynamicResource Arturia.Color.Border.Default}" />
         <Setter Property="BorderThickness" Value="{DynamicResource Arturia.Border.Thickness.Default}" />
         <Setter Property="CornerRadius" Value="{DynamicResource Arturia.Border.CornerRadius.Default}" />
-        <Setter Property="Height" Value="55" />
-        <Setter Property="Width" Value="250" />
+        <Setter Property="Height" Value="45" />
+        <Setter Property="Width" Value="203" />
 
         <Style Selector="^ TextBlock">
             <Setter Property="Margin" Value="19,0,0,0" />
@@ -52,7 +52,7 @@
 
         <Style Selector="^ /template/ Border#PopupBorder">
             <Setter Property="Margin" Value="0,5,0,0" />
-            <Setter Property="Width" Value="250" />
+            <Setter Property="Width" Value="203" />
             <Setter Property="Background" Value="{DynamicResource Arturia.Color.Border.Background}" />
             <Setter Property="BorderBrush" Value="{DynamicResource Arturia.Color.Border.Hover}" />
             <Setter Property="CornerRadius" Value="{DynamicResource Arturia.Border.CornerRadius.Default}" />

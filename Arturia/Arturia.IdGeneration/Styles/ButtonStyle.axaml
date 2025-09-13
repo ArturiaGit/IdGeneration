@@ -11,8 +11,8 @@
 
     <Style Selector="Button.Default">
         <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="Height" Value="50" />
-        <Setter Property="Width" Value="100" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Width" Value="80" />
         <Setter Property="FontSize" Value="{DynamicResource Arturia.FontSize.Normal}" />
         <Setter Property="FontFamily" Value="{DynamicResource Arturia.FontFamily.Normal}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />

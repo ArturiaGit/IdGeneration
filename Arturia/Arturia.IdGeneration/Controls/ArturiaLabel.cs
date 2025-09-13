@@ -13,8 +13,8 @@ public class ArturiaLabel : ContentControl
         BackgroundProperty.OverrideDefaultValue<ArturiaLabel>(new SolidColorBrush(Color.Parse("#ECECEC")));
         BorderThicknessProperty.OverrideDefaultValue<ArturiaLabel>(new Thickness(1));
         BorderBrushProperty.OverrideDefaultValue<ArturiaLabel>(new SolidColorBrush(Color.Parse("#B5B5B5")));
-        WidthProperty.OverrideDefaultValue<ArturiaLabel>(144);
-        HeightProperty.OverrideDefaultValue<ArturiaLabel>(55);
+        WidthProperty.OverrideDefaultValue<ArturiaLabel>(130);
+        HeightProperty.OverrideDefaultValue<ArturiaLabel>(45);
     }
     
     public static readonly StyledProperty<string?> TextProperty =

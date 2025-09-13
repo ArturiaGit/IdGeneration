@@ -18,9 +18,9 @@
 
     <Color x:Key="Arturia.Color.Border.Pressed">White</Color>
 
-    <x:Double x:Key="Arturia.FontSize.Normal">22</x:Double>
-    <x:Double x:Key="Arturia.FontSize.Watermark">18</x:Double>
-    <x:Double x:Key="Arturia.FontSize.H1">30</x:Double>
+    <x:Double x:Key="Arturia.FontSize.Normal">18</x:Double>
+    <x:Double x:Key="Arturia.FontSize.Watermark">15</x:Double>
+    <x:Double x:Key="Arturia.FontSize.H1">25</x:Double>
 
     <Thickness x:Key="Arturia.Border.Thickness.Default">1</Thickness>
     <CornerRadius x:Key="Arturia.Border.CornerRadius.Default">5</CornerRadius>

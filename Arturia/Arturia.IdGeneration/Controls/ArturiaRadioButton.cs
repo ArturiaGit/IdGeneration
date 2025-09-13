@@ -13,7 +13,7 @@ public class ArturiaRadioButton : RadioButton
     }
     
     public static readonly StyledProperty<double> OuterBorderSizeProperty = AvaloniaProperty.Register<ArturiaRadioButton, double>(
-        nameof(OuterBorderSize), defaultValue: 26);
+        nameof(OuterBorderSize), defaultValue: 20);
     public double OuterBorderSize
     {
         get => GetValue(OuterBorderSizeProperty);
@@ -21,7 +21,7 @@ public class ArturiaRadioButton : RadioButton
     }
     
     public static readonly StyledProperty<double> InnerBorderSizeProperty = AvaloniaProperty.Register<ArturiaRadioButton, double>(
-        nameof(InnerBorderSize), defaultValue: 12);
+        nameof(InnerBorderSize), defaultValue: 8);
     public double InnerBorderSize
     {
         get => GetValue(InnerBorderSizeProperty);

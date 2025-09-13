@@ -17,8 +17,8 @@ public class ArturiaDateBox : TemplatedControl
     
     static ArturiaDateBox()
     {
-        HeightProperty.OverrideDefaultValue<ArturiaDateBox>(55);
-        WidthProperty.OverrideDefaultValue<ArturiaDateBox>(250);
+        HeightProperty.OverrideDefaultValue<ArturiaDateBox>(45);
+        WidthProperty.OverrideDefaultValue<ArturiaDateBox>(203);
     }
     
     public static readonly StyledProperty<double> IconHeightProperty = AvaloniaProperty.Register<ArturiaDateBox, double>(

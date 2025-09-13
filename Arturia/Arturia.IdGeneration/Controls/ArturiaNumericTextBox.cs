@@ -15,8 +15,8 @@ public class ArturiaNumericTextBox : TemplatedControl
     
     static ArturiaNumericTextBox()
     {
-        HeightProperty.OverrideDefaultValue<ArturiaNumericTextBox>(55);
-        WidthProperty.OverrideDefaultValue<ArturiaNumericTextBox>(250);
+        HeightProperty.OverrideDefaultValue<ArturiaNumericTextBox>(45);
+        WidthProperty.OverrideDefaultValue<ArturiaNumericTextBox>(203);
     }
 
     public static readonly StyledProperty<string?> TextProperty = AvaloniaProperty.Register<ArturiaNumericTextBox, string?>(

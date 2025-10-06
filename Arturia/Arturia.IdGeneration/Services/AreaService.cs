@@ -22,7 +22,7 @@ public class AreaService(IOptions<List<AreaModel>> areas) : IAreaService
             return new List<AreaModel>();
         }).Select(r => r).ToList();
 
-    public ICollection<AreaModel> GetDistricts(string provinceName, string cityName)
+    public ICollection<AreaModel> GetCounties(string provinceName, string cityName)
     {
         ICollection<AreaModel> cityes = _areas.Where(r=>r.Name.Equals(provinceName))
             .SelectMany(r => r.Children!)

@@ -18,6 +18,7 @@ public static class ServiceCollectionExtensions
         });
 
         services.AddTransient<MessageBoxView>();
+        services.AddTransient<DisclaimerView>();
         #endregion 注册视图
 
         #region 注册模型

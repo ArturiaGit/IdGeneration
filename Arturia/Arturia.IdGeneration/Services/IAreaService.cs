@@ -25,5 +25,5 @@ public interface IAreaService
     /// <param name="provinceName">省份名称</param>
     /// <param name="cityName">市名称</param>
     /// <returns>县区名称集合</returns>
-    public ICollection<AreaModel> GetDistricts(string provinceName,string cityName);
+    public ICollection<AreaModel> GetCounties(string provinceName,string cityName);
 }

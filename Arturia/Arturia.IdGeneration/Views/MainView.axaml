@@ -4,7 +4,7 @@
     Focusable="True"
     Height="720"
     Icon="/Assets/avalonia-logo.ico"
-    Title="IdGeneration"
+    Title="身份证随机生成工具"
     Width="1280"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d"
@@ -26,10 +26,25 @@
 
     <Interaction.Behaviors>
         <EventTriggerBehavior EventName="Loaded">
-            <InvokeCommandAction Command="{Binding LoadProvinceNamesCommand}" />
+            <InvokeCommandAction Command="{Binding LoadProvincesCommand}" />
         </EventTriggerBehavior>
     </Interaction.Behaviors>
     <Grid ColumnDefinitions="30,*" RowDefinitions="10,Auto,10,Auto,10,Auto,Auto,10,Auto,10,Auto,10,Auto,10,Auto,10,*,10">
+        <ExperimentalAcrylicBorder
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Grid.Row="0"
+            Grid.RowSpan="18"
+            IsVisible="{Binding IsVisible}"
+            ZIndex="9999">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    MaterialOpacity="0.15"
+                    TintColor="#50000000"
+                    TintOpacity="0.1" />
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
         <TextBlock
             Classes="H1"
             Grid.Column="1"
@@ -53,7 +68,7 @@
                     x:Name="ProvinceComboBox">
                     <Interaction.Behaviors>
                         <EventTriggerBehavior EventName="SelectionChanged">
-                            <InvokeCommandAction Command="{Binding LoadCityNamesCommand}" CommandParameter="{Binding #ProvinceComboBox.SelectedItem}" />
+                            <InvokeCommandAction Command="{Binding LoadCitiesCommand}" CommandParameter="{Binding #ProvinceComboBox.SelectedItem}" />
                         </EventTriggerBehavior>
                     </Interaction.Behaviors>
                 </ComboBox>
@@ -68,7 +83,7 @@
                 x:Name="CityComboBox">
                 <Interaction.Behaviors>
                     <EventTriggerBehavior EventName="SelectionChanged">
-                        <InvokeCommandAction Command="{Binding LoadDistrictNamesCommand}">
+                        <InvokeCommandAction Command="{Binding LoadDistrictsCommand}">
                             <InvokeCommandAction.CommandParameter>
                                 <MultiBinding Converter="{StaticResource ObjectArrayConverter}">
                                     <Binding ElementName="ProvinceComboBox" Path="SelectedItem" />
@@ -84,7 +99,7 @@
                 Classes="ArturiaComboBox"
                 DisplayMemberBinding="{Binding Name}"
                 Grid.Column="4"
-                ItemsSource="{Binding Districts}"
+                ItemsSource="{Binding Counties}"
                 SelectedIndex="{Binding SelectedDistrictIndex}"
                 x:Name="DistrictComboBox" />
         </Grid>
@@ -234,6 +249,7 @@
                 Classes="Default"
                 Command="{Binding GenerationResultCommand}"
                 Content="生成"
+                Foreground="White"
                 Grid.Column="0" />
             <Button
                 Background="{DynamicResource Arturia.Button.Background.Default}"

@@ -10,7 +10,7 @@ namespace Arturia.IdGeneration.Services;
 
 public class DialogService(IServiceProvider provider) : IDialogService
 {
-    public async Task ShowWindowAsync<TViewModel>(TViewModel viewModel,int seconds=0) where TViewModel : ViewModelBase
+    public async Task<object> ShowWindowAsync<TViewModel>(TViewModel viewModel,int seconds=0) where TViewModel : ViewModelBase
     {
         string? viewName = typeof(TViewModel).AssemblyQualifiedName?
             .Replace("ViewModel", "View",StringComparison.InvariantCulture)
@@ -38,14 +38,14 @@ public class DialogService(IServiceProvider provider) : IDialogService
         },useSynchronizationContext:false);
         try
         {
-            await view.ShowDialog(GetMainWindow());
+            return await view.ShowDialog<object>(GetMainWindow());
         }
         finally
         {
             cts?.Dispose();
         }
     }
-    
+
     private static Window GetMainWindow()
         => App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop
             ? desktop.MainWindow

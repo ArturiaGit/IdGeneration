@@ -52,4 +52,8 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="System.Xaml" />
+    </ItemGroup>
 </Project>

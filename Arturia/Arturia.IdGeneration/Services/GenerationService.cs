@@ -43,17 +43,22 @@ public class GenerationService : IGenerationService
         for (int i = 0; i < options.GenerationCount; i++)
         {
             int genderCode = GetGender(options.GenderOptionEnum);
+            
             string genderString = genderCode % 2 == 0 ? "女" : "男";
+            string locationCode = options.LocationCodes[i].Length > 6 
+                ? options.LocationCodes[i][..4]+"00"
+                : options.LocationCodes[i];
+            string birthday = options.BirthDays[i];
             
             string sequenceCode = $"{Random.Next(0, 100):D2}{genderCode}";//顺序位
-            string idCard = options.LocationCode + options.BirthDays[i].Replace("/",string.Empty) + sequenceCode;
+            string idCard = locationCode + birthday.Replace("/",string.Empty) + sequenceCode;
             CalculateChecksum(ref idCard);
 
             GenerationResult result = new()
             {
                 IdCard = idCard,
                 Name = GetName(options.NameGenerationOptionEnum),
-                Location = options.Location,
+                Location = options.Locations[i],
                 Gender = genderString,
                 BirthDate = options.BirthDays[i],
                 Age = DateTime.Now.Year - DateTime.Parse(options.BirthDays[i]).Year

@@ -5,5 +5,5 @@ namespace Arturia.IdGeneration.Services;
 
 public interface IDialogService
 {
-    public Task ShowWindowAsync<TViewModel>(TViewModel viewModel,int seconds) where TViewModel : ViewModelBase;
+    public Task<object> ShowWindowAsync<TViewModel>(TViewModel viewModel,int seconds=0) where TViewModel : ViewModelBase;
 }

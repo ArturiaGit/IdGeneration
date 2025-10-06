@@ -1,0 +1,44 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20" />
+    </Design.PreviewWith>
+
+    <Style Selector="ListBox.Arturia_UnorderedListBox">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="ItemContainerTheme">
+            <Setter.Value>
+                <ControlTheme TargetType="ListBoxItem">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Padding" Value="5" />
+                    <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                        <Setter Property="Background" Value="White" />
+                    </Style>
+                </ControlTheme>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate x:DataType="x:String">
+                    <Border>
+                        <Grid ColumnDefinitions="20,Auto, *">
+                            <Border
+                                Background="Black"
+                                CornerRadius="200"
+                                Grid.Column="1"
+                                Height="8"
+                                Margin="0,5,10,0"
+                                VerticalAlignment="Top"
+                                Width="8" />
+                            <TextBlock
+                                Grid.Column="2"
+                                HorizontalAlignment="Left"
+                                Text="{Binding}"
+                                TextWrapping="WrapWithOverflow"
+                                VerticalAlignment="Center" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</Styles>

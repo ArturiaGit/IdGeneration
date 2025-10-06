@@ -1,0 +1,172 @@
+<Window
+    Background="Transparent"
+    CanResize="False"
+    Height="600"
+    ShowInTaskbar="False"
+    SystemDecorations="None"
+    Title="免责声明"
+    Width="450"
+    WindowStartupLocation="CenterOwner"
+    mc:Ignorable="d"
+    x:Class="Arturia.IdGeneration.Views.DisclaimerView"
+    x:DataType="viewModels:DisclaimerViewModel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:protocol="clr-namespace:Tmds.DBus.Protocol;assembly=Tmds.DBus.Protocol"
+    xmlns:viewModels="clr-namespace:Arturia.IdGeneration.ViewModels"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Window.Resources>
+        <protocol:Array x:Key="DisclaimerPoints" x:TypeArguments="x:String">
+            <x:String>软件开发与测试：作为测试数据，用于验证系统或应用程序对身份证号码格式的兼容性和处理能力。</x:String>
+            <x:String>数据分析与建模：在脱敏数据处理和数据模型建立中，作为格式正确的填充数据。</x:String>
+            <x:String>学术研究与教学：用于解释和演示身份证号码的编码结构与规则。</x:String>
+            <x:String>生成的号码在格式上符合规范，但与实际存在的身份证号码如有雷同纯属巧合</x:String>
+        </protocol:Array>
+
+        <protocol:Array x:Key="TechnicalDetails" x:TypeArguments="x:String">
+            <x:String>地址码（前6位）：数据来源于中华人民共和国国家统计局发布的最新及历史《全国行政区划代码》。本软件会尽力保持该数据库的更新，但无法保证其绝对的实时性和准确性</x:String>
+            <x:String>出生日期码（第7-14位）：由用户指定或在合法范围内随机生成。</x:String>
+            <x:String>顺序码（第15-17位）：在指定地址码和出生日期码的条件下随机生成，其中第17位用以区分性别（奇数为男，偶数为女）。</x:String>
+            <x:String>校验码（第18位）：根据国家标准GB 11643-1999中规定的ISO 7064:1983, MOD 11-2校验码算法，对前17位数字本体码进行计算得出。</x:String>
+        </protocol:Array>
+
+        <protocol:Array x:Key="ProhibitedUses" x:TypeArguments="x:String">
+            <x:String>尝试在任何政府、企业、或个人应用中进行实名注册、身份认证或资格验证。</x:String>
+            <x:String>用于任何形式的金融、信贷、支付等经济活动。</x:String>
+            <x:String>用于制作、伪造、变造任何形式的身份证件（如实体证件、复印件、扫描件等）。</x:String>
+            <x:String>用于网络诈骗、虚假宣传、散布谣言等任何违反法律法规的行为。</x:String>
+            <x:String>用于任何可能侵犯他人隐私或造成社会秩序混乱的活动。</x:String>
+        </protocol:Array>
+    </Window.Resources>
+
+    <Window.Styles>
+        <Style Selector="TextBlock.Emphasis">
+            <Setter Property="Foreground" Value="{DynamicResource Arturia.Color.Foreground.Warning}" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style Selector="Button.Accept">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Width" Value="120" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+    </Window.Styles>
+
+    <Border
+        Background="White"
+        CornerRadius="25"
+        Height="600"
+        Width="450">
+        <Grid ColumnDefinitions="20,*,20" RowDefinitions="*,20,420,15,1,20,*,20">
+            <Border
+                Background="LightGray"
+                CornerRadius="25,25,0,0"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Grid.Row="0">
+                <TextBlock
+                    Classes="H1"
+                    FontWeight="Bold"
+                    HorizontalAlignment="Center"
+                    Text="软件免责声明"
+                    VerticalAlignment="Center" />
+            </Border>
+            <ScrollViewer Grid.Column="1" Grid.Row="2">
+                <StackPanel Orientation="Vertical" Spacing="10">
+                    <TextBlock Classes="Emphasis">
+                        <PathIcon Data="{DynamicResource Arturia.PathIcon.Warning2}" Foreground="{DynamicResource Arturia.Color.Foreground.Warning}" />
+                        请务必知晓：
+                    </TextBlock>
+                    <TextBlock
+                        HorizontalAlignment="Left"
+                        Text="根据《中华人民共和国居民身份证法》，任何伪造、变造居民身份证的行为都属于违法行为。利用技术手段生成虚拟身份证号码用于非法目的，例如冒用他人身份、进行网络诈骗、注册不法账号等，可能会构成诈骗罪、侵犯公民个人信息罪、伪造、变造、买卖身份证件罪等，并将被依法追究刑事责任。本软件的开发者强烈谴责任何滥用生成信息的行为，并在此提供以下免责声明。请您在使用本软件前，仔细阅读并充分理解以下所有条款。"
+                        TextWrapping="Wrap" />
+                    <TextBlock Classes="Emphasis">
+                        软件免责声明
+                        <PathIcon Data="{DynamicResource Arturia.PathIcon.Safety}" Foreground="Gray" />
+                    </TextBlock>
+                    <TextBlock HorizontalAlignment="Left" Text="本软件（以下简称“本软件”）生成的18位居民身份证号码，是基于公开的编码规则，通过计算机算法随机组合而成，不对应任何真实存在的公民身份信息，是完全虚构的号码。本软件旨在为开发者、测试人员及研究人员提供一个便捷的、符合格式校验规则的数据生成工具，仅可用于以下合法场景：" />
+                    <ListBox Classes="Arturia_UnorderedListBox" ItemsSource="{StaticResource DisclaimerPoints}" />
+                    <StackPanel Orientation="Horizontal" Spacing="5">
+                        <PathIcon Data="{DynamicResource Arturia.PathIcon.Gear}" Foreground="Gray" />
+                        <TextBlock
+                            Classes="Emphasis"
+                            Foreground="Black"
+                            Text="技术实现说明"
+                            VerticalAlignment="Top" />
+                    </StackPanel>
+                    <TextBlock HorizontalAlignment="Left" Text="本软件生成的身份证号码严格遵循中华人民共和国国家标准GB 11643-1999《公民身份号码》的规定：" />
+                    <ListBox Classes="Arturia_UnorderedListBox" ItemsSource="{StaticResource TechnicalDetails}" />
+                    <TextBlock Classes="Emphasis">
+                        <PathIcon Data="{DynamicResource Arturia.PathIcon.Warning2}" Foreground="{DynamicResource Arturia.Color.Foreground.Warning}" />
+                        严禁滥用：
+                    </TextBlock>
+                    <TextBlock HorizontalAlignment="Left" Text="任何用户均不得将本软件生成的身份证号码用于除上述合法场景外的任何其他用途，包括但不限于：" />
+                    <ListBox Classes="Arturia_UnorderedListBox" ItemsSource="{StaticResource ProhibitedUses}" />
+                    <TextBlock
+                        Classes="Emphasis"
+                        Foreground="Black"
+                        HorizontalAlignment="Left"
+                        Text="责任限制：" />
+                    <TextBlock Text="本软件的作者/开发者（以下简称“作者”）不保证所生成号码的可用性、准确性或满足用户的特定需求。" />
+                    <TextBlock Text="用户因使用本软件所做出的任何行为，以及因这些行为所导致的任何直接、间接、偶然、特殊、衍生性或惩罚性的损害、损失或法律责任，均由用户本人独立承担。" />
+                    <TextBlock Text="作者明确声明，对用户滥用本软件生成的号码所产生的一切法律后果，概不负责。一旦用户违反所在国家或地区的法律法规，其一切行为及后果均与作者无关。" />
+                    <TextBlock
+                        FontWeight="Bold"
+                        Foreground="{DynamicResource Arturia.Color.Foreground.Warning}"
+                        HorizontalAlignment="Left"
+                        Text="用户下载、安装或使用本软件的任何部分，即表示已完全理解并同意本声明的所有条款。如果您不同意本声明的任何内容，请立即停止使用并卸载本软件。" />
+                    <TextBlock
+                        FontWeight="Bold"
+                        Foreground="{DynamicResource Arturia.Color.Foreground.Warning}"
+                        HorizontalAlignment="Left"
+                        Text="本声明的最终解释权归本软件作者所有。" />
+
+                </StackPanel>
+            </ScrollViewer>
+            <Border
+                Background="LightGray"
+                Grid.Column="1"
+                Grid.Row="4"
+                Height="1"
+                VerticalAlignment="Top" />
+            <Grid
+                ColumnDefinitions="*,50,*"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Grid.Row="6">
+                <Button
+                    Background="{DynamicResource Arturia.Color.Foreground.Accent}"
+                    Classes="Default Accept"
+                    Click="Button_Accept"
+                    Content="同意并继续"
+                    Foreground="White"
+                    Grid.Column="0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center">
+                    <Button.Styles>
+                        <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                            <Setter Property="Foreground" Value="White" />
+                        </Style>
+                    </Button.Styles>
+                </Button>
+                <Button
+                    Background="LightGray"
+                    Classes="Default Accept"
+                    Click="Button_Close"
+                    Content="不同意"
+                    Grid.Column="2"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center" />
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

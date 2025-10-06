@@ -6,8 +6,8 @@ namespace Arturia.IdGeneration.Models;
 
 public record GenerationOptions
 {
-    public string Location { get; init; } = string.Empty;
-    public string LocationCode { get; init; } = string.Empty;
+    public List<string> Locations { get; init; } = [];
+    public List<string> LocationCodes { get; init; } = [];
     public List<string> BirthDays { get; init; } = [];
     public int GenerationCount { get; init; } = 5;
     public GenderOptionEnum GenderOptionEnum { get; init; }

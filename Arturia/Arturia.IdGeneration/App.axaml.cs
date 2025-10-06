@@ -29,7 +29,7 @@ public partial class App : Application
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             DisableAvaloniaDataAnnotationValidation();
-
+            
             string jsonPath = Path.Combine(Directory.GetCurrentDirectory(), "Data");
             var builder = new ConfigurationBuilder()
                 .SetBasePath(jsonPath)

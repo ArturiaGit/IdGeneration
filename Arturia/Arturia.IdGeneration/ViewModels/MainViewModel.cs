@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using Arturia.IdGeneration.Enums;
 using Arturia.IdGeneration.Models;
 using Arturia.IdGeneration.Services;
+using Arturia.IdGeneration.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -12,12 +15,12 @@ namespace Arturia.IdGeneration.ViewModels;
 public partial class MainViewModel(IAreaService areaService, IDialogService dialogService,IGenerationService generationService) : ViewModelBase
 {
     #region 私有字段
-    private static readonly Random Random = new();
+    private static readonly Random Random = new(Guid.NewGuid().GetHashCode());
     
-    private readonly int[] _maleDigits = { 1, 3, 5, 7, 9 };
-    private readonly int[] _femaleDigits = { 0, 2, 4, 6, 8 };
+    private readonly int[] _maleDigits = [1, 3, 5, 7, 9];
+    private readonly int[] _femaleDigits = [0, 2, 4, 6, 8];
 
-    private bool _isUpdatingAges = false;
+    private string _code = string.Empty;
     #endregion
     
     #region 通知属性
@@ -28,7 +31,7 @@ public partial class MainViewModel(IAreaService areaService, IDialogService dial
     private ObservableCollection<AreaModel> _cities = new();
     
     [ObservableProperty]
-    private ObservableCollection<AreaModel> _districts = new();
+    private ObservableCollection<AreaModel> _counties = new();
     
     [ObservableProperty] 
     private int _selectedProvinceIndex = -1;
@@ -54,6 +57,9 @@ public partial class MainViewModel(IAreaService areaService, IDialogService dial
     private string _resultJson = string.Empty;
     
     [ObservableProperty]
+    private bool _isVisible = true;
+    
+    [ObservableProperty]
     private GenderOptionEnum _currentGenderOption = GenderOptionEnum.Male;
     
     [ObservableProperty]
@@ -65,8 +71,16 @@ public partial class MainViewModel(IAreaService areaService, IDialogService dial
     
     #region 命令
     [RelayCommand]
-    private void LoadProvinceNames()
+    private async Task LoadProvinces()
     {
+        bool? result = await dialogService.ShowWindowAsync(new DisclaimerViewModel()) as bool?;
+        if (result is not true)
+        {
+            Environment.Exit(0);
+            return;
+        }
+
+        IsVisible = result is false;
         Provinces.Clear();
         Provinces.Insert(0,new AreaModel
         {
@@ -83,7 +97,7 @@ public partial class MainViewModel(IAreaService areaService, IDialogService dial
     }
 
     [RelayCommand]
-    private void LoadCityNames(AreaModel? province)
+    private void LoadCities(AreaModel? province)
     {
         Cities.Clear();
         Cities.Insert(0,new AreaModel
@@ -103,10 +117,10 @@ public partial class MainViewModel(IAreaService areaService, IDialogService dial
     }
 
     [RelayCommand]
-    private void LoadDistrictNames(List<string> parameter)
+    private void LoadDistricts(List<string> parameter)
     {
-        Districts.Clear();
-        Districts.Insert(0,new  AreaModel
+        Counties.Clear();
+        Counties.Insert(0,new  AreaModel
         {
             Name = "请选择县/区",
             Code = string.Empty,
@@ -120,27 +134,17 @@ public partial class MainViewModel(IAreaService areaService, IDialogService dial
         string provinceName = parameter[0];
         string cityName = parameter[1];
         
-        ICollection<AreaModel> districts = areaService.GetDistricts(provinceName, cityName);
-        foreach (AreaModel district in districts)
-            Districts.Add(district);
+        ICollection<AreaModel> counties = areaService.GetCounties(provinceName, cityName);
+        foreach (AreaModel district in counties)
+            Counties.Add(district);
     }
 
     [RelayCommand]
     private void GenerationResult()
     {
-        string locationCode = GetLocationCode();
-        if (string.IsNullOrEmpty(locationCode))
-        {
-            dialogService.ShowWindowAsync(new MessageBoxViewModel
-            {
-                Message = "请选择出生地址",
-            },2);
-            return;
-        }
-
         if (EndAge - StartAge < 0)
         {
-            dialogService.ShowWindowAsync(new MessageBoxViewModel
+            _ = dialogService.ShowWindowAsync(new MessageBoxViewModel
             {
                 Message = "年龄范围不正确",
             },2);
@@ -148,6 +152,8 @@ public partial class MainViewModel(IAreaService areaService, IDialogService dial
         }
 
         List<string> birthdays = [];
+        List<string> locations = [];
+        List<string> locationCodes = [];
         for (int i = 0; i < GenerationCount; i++)
         {
             string birthday = GetBirthDay(CurrentBirthDateOptionType);
@@ -160,13 +166,15 @@ public partial class MainViewModel(IAreaService areaService, IDialogService dial
                 return;
             }
             
+            locations.Add(GetLocation());
+            locationCodes.Add(GetLocationCode());
             birthdays.Add(birthday);
         }
 
         GenerationOptions options = new GenerationOptions
         {
-            Location = GetLocation(),
-            LocationCode = locationCode,
+            Locations = locations,
+            LocationCodes = locationCodes,
             BirthDays = birthdays,
             GenerationCount = GenerationCount,
             NameGenerationOptionEnum = CurrentNameType,
@@ -178,29 +186,76 @@ public partial class MainViewModel(IAreaService areaService, IDialogService dial
     #endregion
     
     #region 私有方法
+
     /// <summary>
     /// 获取城市代码
     /// </summary>
     /// <returns>城市代码</returns>
     private string GetLocationCode()
-    {
-        if (SelectedDistrictIndex <= 0)
-            return string.Empty;
-
-        return Districts[SelectedDistrictIndex].Code;
-    }
+        => SelectedDistrictIndex <= 0 ? _code: Counties[SelectedDistrictIndex].Code;
 
     /// <summary>
-    /// 获取城市具体地址
+    /// 获取城市具体地址。
+    /// 如果用户未完整选择省市区，则会进行随机选择。
     /// </summary>
-    /// <returns>城市具体地址</returns>
+    /// <returns>格式为 "省 市 县/区" 的地址字符串。</returns>
     private string GetLocation()
     {
-        if (SelectedProvinceIndex <= 0 || SelectedCityIndex <= 0 || SelectedDistrictIndex <= 0)
-            return string.Empty;
+        string provinceName;
+        string cityName;
+        string countyName;
 
-        return
-            $"{Provinces[SelectedProvinceIndex].Name} {Cities[SelectedCityIndex].Name} {Districts[SelectedDistrictIndex].Name}";
+        if (SelectedProvinceIndex <= 0)
+        {
+            int provinceIndex = Random.Next(1, Provinces.Count);
+            provinceName = Provinces[provinceIndex].Name;
+
+            var cities = areaService.GetCities(provinceName).ToList();
+            int cityIndex = Random.Next(0, cities.Count);
+            cityName = cities[cityIndex].Name;
+
+            var counties = areaService.GetCounties(provinceName, cityName).ToList();
+            int countyIndex = Random.Next(0, counties.Count);
+            countyName = counties[countyIndex].Name;
+            _code = counties[countyIndex].Code;
+        }
+        else
+        {
+            provinceName = Provinces[SelectedProvinceIndex].Name;
+
+            if (SelectedCityIndex <= 0)
+            {
+                var cities = areaService.GetCities(provinceName).ToList();
+
+                int cityIndex = Random.Next(1, cities.Count);
+                cityName = cities[cityIndex].Name;
+
+                var counties = areaService.GetCounties(provinceName, cityName).ToList();
+
+                int countyIndex = Random.Next(1, counties.Count);
+                countyName = counties[countyIndex].Name;
+                _code = counties[countyIndex].Code;
+            }
+            else
+            {
+                cityName = Cities[SelectedCityIndex].Name;
+
+                if (SelectedDistrictIndex <= 0)
+                {
+                    var counties = areaService.GetCounties(provinceName, cityName).ToList();
+
+                    int countyIndex = Random.Next(1, counties.Count);
+                    countyName = counties[countyIndex].Name;
+                    _code = counties[countyIndex].Code;
+                }
+                else
+                    countyName = Counties[SelectedDistrictIndex].Name;
+            }
+        }
+
+        if (cityName == "县")
+            cityName = string.Empty;
+        return $"{provinceName} {cityName} {countyName}";
     }
     
     /// <summary>
@@ -234,6 +289,5 @@ public partial class MainViewModel(IAreaService areaService, IDialogService dial
                 throw new ArgumentOutOfRangeException(nameof(birthDateOption), "提供了无效的出生日期选项。");
         }
     }
-
     #endregion
 }

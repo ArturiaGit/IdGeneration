@@ -6,6 +6,7 @@
         <Setter Property="Foreground" Value="{DynamicResource Arturia.Color.Foreground.Default}" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
     <Style Selector="TextBlock.H1">

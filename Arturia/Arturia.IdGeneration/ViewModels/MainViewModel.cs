@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using Arturia.IdGeneration.Enums;
 using Arturia.IdGeneration.Models;
 using Arturia.IdGeneration.Services;
-using Arturia.IdGeneration.Views;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Input.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -138,6 +142,36 @@ public partial class MainViewModel(IAreaService areaService, IDialogService dial
         foreach (AreaModel district in counties)
             Counties.Add(district);
     }
+    
+    [RelayCommand]
+    private async Task CopyResult()
+    {
+        if (string.IsNullOrEmpty(ResultJson))
+            return;
+        
+        try
+        {
+            if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime { MainWindow.Clipboard: { } clipboard })
+            {
+                await clipboard.SetTextAsync(ResultJson);
+            }
+            _ = dialogService.ShowWindowAsync(new MessageBoxViewModel
+            {
+                Message = "已复制到剪贴板",
+            },2);
+        }
+        catch (Exception e)
+        {
+            _ = dialogService.ShowWindowAsync(new MessageBoxViewModel
+            {
+                Message = $"复制失败: {e.Message}",
+            },2);
+        }
+    }
+    
+    [RelayCommand]
+    private void ClearResult()
+        => ResultJson = string.Empty;
 
     [RelayCommand]
     private void GenerationResult()

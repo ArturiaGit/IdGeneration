@@ -25,6 +25,7 @@
         <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="{Binding $self.Background}" />
             <Setter Property="BorderBrush" Value="{DynamicResource Arturia.Color.Border.Hover}" />
+            <Setter Property="Foreground" Value="{Binding $self.Foreground}" />
         </Style>
     </Style>
 

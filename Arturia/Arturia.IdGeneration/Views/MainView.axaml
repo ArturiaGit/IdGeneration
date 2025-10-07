@@ -254,11 +254,13 @@
             <Button
                 Background="{DynamicResource Arturia.Button.Background.Default}"
                 Classes="Default"
+                Command="{Binding CopyResultCommand}"
                 Content="复制"
                 Grid.Column="2" />
             <Button
                 Background="{DynamicResource Arturia.Button.Background.Default}"
                 Classes="Default"
+                Command="{Binding ClearResultCommand}"
                 Content="清空"
                 Grid.Column="4" />
         </Grid>
